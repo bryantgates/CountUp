@@ -15,15 +15,14 @@ function getValues() {
 //generate the range of numbers to display
 //Business/logic function
 function generateNumbers(start, end) {
+  let numberBasket = [];
 
-let numberBasket = [];
-
-  for (let number = start; number <=end; number = number + 1) {
+  for (let number = start; number <= end; number = number + 1) {
     numberBasket.push(number); //[0, 1, 2, ...., 100]
   }
 
- return numberBasket; // => [0, 1, 2, ...., 100]
- //ASK WHAT RETURN AND FOR MEANS
+  return numberBasket; // => [0, 1, 2, ...., 100]
+  //ASK WHAT RETURN AND FOR MEANS
 }
 
 //placing the generated on the page And bolding the even numnbers
@@ -33,15 +32,19 @@ function displayNumbers(numbers) {
   //numbers = [10,11,12,13,14,15]
   //numbers.length = 6
 
-  let results = '';
+  let results = "";
 
   for (let index = 0; index < numbers.length; index = index + 1) {
-      let currentNumber = numbers[index]; 
+    let currentNumber = numbers[index];
 
-      results = results + "<tr><td>" + currentNumber + "</td></tr>";
+    if (currentNumber % 2 == 0) {
+      results += `<tr><td class="evenBold">${currentNumber}</td></tr>`;
+    } else {
+      results += `<tr><td>${currentNumber}</td></tr>`;
+    }
+
   }
 
-  let tableBody = document.getElementById('results');
+  let tableBody = document.getElementById("results");
   tableBody.innerHTML = results;
-
 }

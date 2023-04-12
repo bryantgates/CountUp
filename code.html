@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <link
@@ -41,99 +41,169 @@
       href="/img/favicon-32x32.png"
       type="image/x-icon"
     />
-</head>
-<body>
-<header>
-     <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="/img/Gates Aqua Mark (2560 × 2560 px).png" height="60" />
-        </a>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="/img/Gates Aqua Mark (2560 × 2560 px).png" height="60" />
+          </a>
 
-        <!-- TODO: customize mobile menu button -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-bg">
-            <i class="bi bi-list"></i>
-          </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav navbar-nav-bg ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/app.html">The App</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/code.html">The Code</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">The Repo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">Blog</a>
-            </li>
-          </ul>
+          <!-- TODO: customize mobile menu button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-bg">
+              <i class="bi bi-list"></i>
+            </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav navbar-nav-bg ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#home"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/app.html">The App</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/code.html">The Code</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">The Repo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="blog.html">Blog</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-</header>
-<main class="container">
-<h1 class="border-bottom border-2 border-dark mt-3">The Code</h1>
-<div class="row">
-    <div class="col-12 col-lg-8">
-        <pre class="line-numbers">
+      </nav>
+    </header>
+    <main class="container">
+      <h1 class="border-bottom border-2 border-dark mt-3">The Code</h1>
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
             <code class="language-js">
-                function displayMessage() {
-    let msg = document.getElementById("message").value;
-    alert(msg);
-  
+//Entry point aka controller function
+
+function getValues() {
+  let startValue = document.getElementById("startValue").value;
+  let endValue = document.getElementById("endValue").value;
+
+  let startNumber = parseInt(startValue); // startNumber = 0
+  let endNumber = parseInt(endValue); // endNumber = 100
+
+  let numberArray = generateNumbers(startNumber, endNumber);
+  displayNumbers(numberArray);
 }
+
+//generate the range of numbers to display
+//Business/logic function
+function generateNumbers(start, end) {
+  let numberBasket = [];
+
+  for (let number = start; number <= end; number = number + 1) {
+    numberBasket.push(number); //[0, 1, 2, ...., 100]
+  }
+
+  return numberBasket; // => [0, 1, 2, ...., 100]
+}
+
+//placing the generated on the page And bolding the even numnbers
+//View function
+function displayNumbers(numbers) {
+  //start = 10, end = 15
+  //numbers = [10,11,12,13,14,15]
+  //numbers.length = 6
+
+  let results = "";
+
+  for (let index = 0; index < numbers.length; index = index + 1) {
+    let currentNumber = numbers[index];
+
+    if (currentNumber % 2 == 0) {
+      results += `&lt;tr>&lt;td class="evenBold">${currentNumber}&lt;/td>&lt;/tr>`;
+    } else {
+      results += `&lt;tr>&lt;td>${currentNumber}&lt;/td>&lt;/tr>`;
+    }
+
+  }
+
+  let tableBody = document.getElementById("results");
+  tableBody.innerHTML = results;
+}
+  
             </code>
         </pre>
-    </div>
-    <div class="col-12 col-lg-4">
-        <p>The code is structured in one function</p>
-        <h5>displayMessage</h5>
-        <p>Prints out the message</p>
-    </div>
-</div>
-</main>
-<footer>
-      
-        <div class="container">
-            <div
-              class="row mb-3 mt-2 row-cols-1 row-cols-md-3 align-items-center gy-3 text-center"
-            >
-              <div class="col">
-                <img src="/img/Water Gates Banner.png" height="90" class="pt-1" />
-              </div>
-              <div class="col text-md-end">
-                <a href="mylinked in">
-                  <i class="bi bi-linkedin p-2 socialicons"></i></a
-                >&nbsp;<a href="https://github.com/bryantgates"
-                  ><i class="bi bi-github p-2 socialicons"></i
-                ></a>
-              </div>
-              <div class="col text-dark order-md-first text-md-start mt-2">
-                &copy; 2023 Bryant Gates
-              </div>
-            </div>
         </div>
-      
+        <div class="col-12 col-lg-4">
+          <p>The code is structured in three functions</p>
+          <h5>getValues</h5>
+          <p>
+            getValues is used to transfer the numerical input from our html
+            table into the JavaScript. Since the numbers are user selected
+            inputs the machine interprets them as 'strings'. This function
+            brings the strings in and transfers them into numbers for JavaScript
+            to use, which it then sends to the generateNumbers function to use.
+            After recieving the numbers from generateNumbers it creates an array
+            that the function displayNumbers can use.
+          </p>
+          <h5>generateNumbers</h5>
+          <p>
+            After recieving the selected numbers (the first and last numbers
+            input by the user) generateNumbers creates a basket to store the
+            numbers. It then places the first number, plus 1 repeated until it
+            reaches the end number. Finally, it returns the basket of numbers to
+            the JavaScript so it can be used in the getValues function
+          </p>
+          <h5>displayNumbers</h5>
+          <p>
+            This function is used to create the table and set the parameters for
+            it. It begins by creating a space for the numbers to all exist in
+            with 'let results = " ";'. It then sets parameters for the
+            currentNumber by allowing the numbers array to access the set index.
+            The currentNumber is then placed into a table and given rules so
+            that all the even numbers are affected by the "evenBold" class,
+            which was created in css to add font weight and change the color.
+            The code is wrapped up by taking this created display and placing it
+            into the "results" to be used by the app's html.
+          </p>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container">
+        <div
+          class="row mb-3 mt-2 row-cols-1 row-cols-md-3 align-items-center gy-3 text-center"
+        >
+          <div class="col">
+            <img src="/img/Water Gates Banner.png" height="90" class="pt-1" />
+          </div>
+          <div class="col text-md-end">
+            <a href="mylinked in">
+              <i class="bi bi-linkedin p-2 socialicons"></i></a
+            >&nbsp;<a href="https://github.com/bryantgates"
+              ><i class="bi bi-github p-2 socialicons"></i
+            ></a>
+          </div>
+          <div class="col text-dark order-md-first text-md-start mt-2">
+            &copy; 2023 Bryant Gates
+          </div>
+        </div>
+      </div>
     </footer>
     <!--Bootstrap CSS-->
     <script
@@ -144,12 +214,12 @@
 
     <script src="/js/prism.js"></script>
     <script>
-        Prism.plugins.NormalizeWhitespace.setDefaults({
-            'remove-trailing': true,
-            'remove-indent': true,
-            'left-trim': true,
-            'right-trim': true
-        })
+      Prism.plugins.NormalizeWhitespace.setDefaults({
+        "remove-trailing": true,
+        "remove-indent": true,
+        "left-trim": true,
+        "right-trim": true,
+      });
     </script>
-</body>
+  </body>
 </html>
