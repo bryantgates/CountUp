@@ -8,8 +8,17 @@ function getValues() {
   let startNumber = parseInt(startValue); // startNumber = 0
   let endNumber = parseInt(endValue); // endNumber = 100
 
-  let numberArray = generateNumbers(startNumber, endNumber);
-  displayNumbers(numberArray);
+  if (isNaN(startNumber) == false && Number.isInteger(endNumber)) {
+    let numberArray = generateNumbers(startNumber, endNumber);
+    displayNumbers(numberArray);
+  } else {
+    //display an error
+    Swal.fire({
+      icon: "error",
+      title: "Oops!",
+      text: "Please enter valid numbers for the start and end values",
+    });
+  }
 }
 
 //generate the range of numbers to display
@@ -42,7 +51,6 @@ function displayNumbers(numbers) {
     } else {
       results += `<tr><td>${currentNumber}</td></tr>`;
     }
-
   }
 
   let tableBody = document.getElementById("results");
