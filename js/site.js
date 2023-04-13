@@ -51,6 +51,8 @@ function displayNumbers(numbers) {
     } else {
       results += `<tr><td>${currentNumber}</td></tr>`;
     }
+
+   
   }
 
   let tableBody = document.getElementById("results");
